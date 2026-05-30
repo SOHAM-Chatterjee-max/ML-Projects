@@ -1,0 +1,11 @@
+def predict(x1,x2):
+    z1=w11*x1+w12*x2+b1
+    a1=1/(1+np.exp(-z1))
+    z2=w21*x1+w22*x2+b2
+    a2=1/(1+np.exp(-z2))
+
+    z3= w31*a1+w32*a2+b3;
+    a3=1/(1+np.exp(-z3))
+    return a3
+prediction=predict(5,1)
+print(f"Prediction: {prediction}")
