@@ -1,0 +1,47 @@
+# Main training loop
+losses = [] # Initialize a list to store losses
+
+for epoch in range(500):
+    # Forward Pass
+    z1=w11*x1+w12*x2+b1
+    a1=1/(1+np.exp(-z1))
+    z2=w21*x1+w22*x2+b2
+    a2=1/(1+np.exp(-z2))
+
+    z3= w31*a1+w32*a2+b3;
+    a3=1/(1+np.exp(-z3))
+
+    # Error calculation
+    En=0.5*(y-a3)**2
+    losses.append(En) # Store the loss for this epoch
+
+     # Backpropagation
+    delta3=(y-a3) * a3 *(1-a3)
+    delta1 = a1 * (1 - a1) * (w31 * delta3)
+    delta2 = a2 * (1 - a2) * (w32 * delta3)
+
+    # Gradient (Weight and Bias Updates)
+    learning_rate=0.1
+    w31=w31+learning_rate*delta3*a1
+    w32=w32+learning_rate*delta3*a2
+
+    w11=w11+learning_rate*delta1*x1
+    w12=w12+learning_rate*delta1*x2
+    w21=w21+learning_rate*delta2*x1
+    w22=w22+learning_rate*delta2*x2
+    b1=b1+learning_rate*delta1
+    b2=b2+learning_rate*delta2
+    b3=b3+learning_rate*delta3
+
+# Print final weights and biases after training
+print("\n--- Training Complete ---")
+print(f"Final En: {En}")
+print(f"Final w11: {w11}")
+print(f"Final w12: {w12}")
+print(f"Final w21: {w21}")
+print(f"Final w22: {w22}")
+print(f"Final w31: {w31}")
+print(f"Final w32: {w32}")
+print(f"Final b1: {b1}")
+print(f"Final b2: {b2}")
+print(f"Final b3: {b3}")
