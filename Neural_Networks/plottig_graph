@@ -1,0 +1,11 @@
+import matplotlib.pyplot as plt
+
+# Plot the loss over epochs
+plt.figure(figsize=(10, 6))
+plt.plot(range(500), losses, label='Training Loss')
+plt.xlabel('Epoch')
+plt.ylabel('Loss (En)')
+plt.title('Loss vs. Epoch during Training')
+plt.grid(True)
+plt.legend()
+plt.show()
